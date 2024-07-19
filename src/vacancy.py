@@ -33,3 +33,20 @@ class WorkVacancy:
         """
         if salary is not None and salary < 0:
             raise ValueError("Salary cannot be negative")
+
+    def __str__(self):
+        return (f"Наименование вакансии: {self.name_vacancy} \n"
+                f"Город, в котором расположен офис компании: {self.city} \n"
+                f"Заработная плата: от {self.salary_from} - до {self.salary_to} {self.salary_currency} \n"
+                f"Описание вакансии: {self.snippet_requirement}")
+
+    def __repr__(self):
+        return (f"{self.__class__.__name__}({self.name_vacancy}, {self.url_vacancy}, {self.city}, "
+                f"{self.salary_to}, {self.salary_from}, {self.salary_currency}, {self.snippet_requirement})")
+
+    def __le__(self, other):
+        if self.salary_to and other.salary_to:
+            return self.salary_to <= other.salary_to
+
+        if self.salary_from and other.salary_from:
+            return self.salary_from <= other.salary_from
