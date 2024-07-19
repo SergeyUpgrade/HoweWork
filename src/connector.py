@@ -55,3 +55,22 @@ class Connector(BaseConnector):
                                 "currency": f.salary_currency, "snippet": f.snippet_requirement})
             return json.dump(new_vac, file, indent=4)
 
+    def get_info(self, key_name: str, value_name: str | int) -> list:
+        """
+        Метод класс возвращающий информацию по вакансиям по ключевым словам полученным о пользователя
+        :param key_name: наименование ключа в словаре из списка вакансий, по которому
+                         ведется сортировка вакансий
+        :param value_name: значение ключа для словаря, содержащегося в списке вакансий,
+                           получаемый от пользователя. Для осуществления подбора вакансий
+        :return: список отфильтрованных вакансий в соответствии с заданным условием
+        """
+        with open("../HoweWork_4/data/vacancies_to_work.json", "r", encoding="utf-8") as file:
+            top_list = json.load(file)
+
+        top_ = sorted(top_list, key=lambda x: x[key_name], reverse=True)
+
+        for item in top_:
+            if value_name == item[key_name]:
+                self._finish_list.append(item)
+
+        return self._finish_list
