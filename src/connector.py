@@ -74,3 +74,14 @@ class Connector(BaseConnector):
                 self._finish_list.append(item)
 
         return self._finish_list
+
+    def delete_vacancy(self) -> None:
+        """
+        Метод удаляющий содержимое файлов: базового, с вакансиями полученными с hh.ru;
+        с вакансиями для сортировки.
+        """
+        with open("../HoweWork_4/data/vacancies_to_work.json", "w", encoding="utf-8") as _:
+            pass
+
+        with open("../HoweWork_4/data/vacancies.json", "w", encoding="utf-8") as _:
+            pass
