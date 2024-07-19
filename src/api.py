@@ -20,3 +20,13 @@ class Parser(BaseHH):
         """
         with open(self.file_worker, "w", encoding="utf-8") as file:
             json.dump(vacancies, file, indent=4)
+
+class HH(Parser):
+    """Класс для работы с API HeadHunter"""
+
+    def __init__(self, file_worker) -> None:
+        self.url = 'https://api.hh.ru/vacancies'
+        self.headers = {'User-Agent': 'HH-User-Agent'}
+        self.params = {'text': '', 'page': 0, 'per_page': 100}
+        self.vacancies = []
+        super().__init__(file_worker)
