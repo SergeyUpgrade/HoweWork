@@ -34,7 +34,7 @@ class Connector(BaseConnector):
         :return: список вакансий после обработки классом WorkVacancy
         """
 
-        with open("../work_to_HH/data/vacancies.json", "r", encoding="utf-8") as file:
+        with open("../HoweWork_4/data/vacancies.json", "r", encoding="utf-8") as file:
             read_vacancy_file = json.load(file)
             for item in read_vacancy_file:
                 if item["salary"] is None or item["area"] is None:
@@ -44,3 +44,14 @@ class Connector(BaseConnector):
                                                           item["salary"]["from"], item["salary"]["to"],
                                                           item["salary"]["currency"], item["snippet"]["requirement"]))
         return self._vacancy_list
+
+    def add_vacancy(self) -> None:
+        vacancy_list = self.create_vacancy_list()
+        new_vac = []
+        with open("../HoweWork_4/data/vacancies_to_work.json", "w", encoding="utf-8") as file:
+            for f in vacancy_list:
+                new_vac.append({"name": f.name_vacancy, "url": f.url_vacancy, "area": f.city,
+                                "salary_from": f.salary_from, "salary_to": f.salary_to,
+                                "currency": f.salary_currency, "snippet": f.snippet_requirement})
+            return json.dump(new_vac, file, indent=4)
+
