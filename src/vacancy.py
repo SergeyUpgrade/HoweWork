@@ -1,6 +1,8 @@
+from typing import Self
+
 class WorkVacancy:
     """
-    Класс WorkVacancy формирующий новую структуру для JSON файла
+    Класс WorkVacancy формирующий новую структуру для загружаемого файла
     вакансий с сайта hh.ru
     """
     def __init__(self, name_vacancy: str, url_vacancy: str, city: str, salary_from: int | None,
@@ -26,7 +28,7 @@ class WorkVacancy:
         self.snippet_requirement = snippet_requirement
 
     @staticmethod
-    def _validate_salary(salary):
+    def _validate_salary(salary: int):
         """
         Метод класса осуществляющий валидацию заработной платы вакансий
         :param salary: зарплата передававемая при инициализации, либо salary_to, либо salary_from
@@ -44,7 +46,7 @@ class WorkVacancy:
         return (f"{self.__class__.__name__}({self.name_vacancy}, {self.url_vacancy}, {self.city}, "
                 f"{self.salary_to}, {self.salary_from}, {self.salary_currency}, {self.snippet_requirement})")
 
-    def __le__(self, other):
+    def __le__(self, other: Self):
         if self.salary_to and other.salary_to:
             return self.salary_to <= other.salary_to
 

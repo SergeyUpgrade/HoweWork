@@ -5,7 +5,7 @@ from src.connector import Connector
 
 def main():
     user_input = input("Введите название вакансии: ")
-    user_request = HH("../HoweWork_4/data/vacancies.json")
+    user_request = HH()
 
     print("Ожидаем получения данных по вакансиям")
 
