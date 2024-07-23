@@ -34,7 +34,7 @@ class Connector(BaseConnector):
         :return: список вакансий после обработки классом WorkVacancy
         """
 
-        with open("../HoweWork_4/data/vacancies.json", "r", encoding="utf-8") as file:
+        with open("../HoweWork/data/vacancies.json", "r", encoding="utf-8") as file:
             read_vacancy_file = json.load(file)
             for item in read_vacancy_file:
                 if item["salary"] is None or item["area"] is None:
@@ -48,7 +48,7 @@ class Connector(BaseConnector):
     def add_vacancy(self) -> None:
         vacancy_list = self.create_vacancy_list()
         new_vac = []
-        with open("../HoweWork_4/data/vacancies_to_work.json", "w", encoding="utf-8") as file:
+        with open("../HoweWork/data/vacancies_to_work.json", "w", encoding="utf-8") as file:
             for f in vacancy_list:
                 new_vac.append({"name": f.name_vacancy, "url": f.url_vacancy, "area": f.city,
                                 "salary_from": f.salary_from, "salary_to": f.salary_to,
@@ -64,7 +64,7 @@ class Connector(BaseConnector):
                            получаемый от пользователя. Для осуществления подбора вакансий
         :return: список отфильтрованных вакансий в соответствии с заданным условием
         """
-        with open("../HoweWork_4/data/vacancies_to_work.json", "r", encoding="utf-8") as file:
+        with open("../HoweWork/data/vacancies_to_work.json", "r", encoding="utf-8") as file:
             top_list = json.load(file)
 
         top_ = sorted(top_list, key=lambda x: x[key_name], reverse=True)
@@ -80,8 +80,8 @@ class Connector(BaseConnector):
         Метод удаляющий содержимое файлов: базового, с вакансиями полученными с hh.ru;
         с вакансиями для сортировки.
         """
-        with open("../HoweWork_4/data/vacancies_to_work.json", "w", encoding="utf-8") as _:
+        with open("../HoweWork/data/vacancies_to_work.json", "w", encoding="utf-8") as _:
             pass
 
-        with open("../HoweWork_4/data/vacancies.json", "w", encoding="utf-8") as _:
+        with open("../HoweWork/data/vacancies.json", "w", encoding="utf-8") as _:
             pass
